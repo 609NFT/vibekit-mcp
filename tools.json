@@ -1,0 +1,363 @@
+[
+  {
+    "category": "Hosting & Apps",
+    "name": "vibekit_list_apps",
+    "description": "List all hosted apps in your VibeKit account.",
+    "inputSchema": { "type": "object", "properties": {} }
+  },
+  {
+    "category": "Hosting & Apps",
+    "name": "vibekit_get_app",
+    "description": "Get details about a specific hosted app.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "appId": { "type": "string", "description": "The app ID to get details for" }
+      },
+      "required": ["appId"]
+    }
+  },
+  {
+    "category": "Hosting & Apps",
+    "name": "vibekit_create_app",
+    "description": "Create a new hosted app from a template.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "template": { "type": "string", "description": "Template to use (e.g., 'nextjs', 'react', 'express')" },
+        "subdomain": { "type": "string", "description": "Subdomain for the app (will be deployed to {subdomain}.vibekit.bot)" }
+      },
+      "required": ["template", "subdomain"]
+    }
+  },
+  {
+    "category": "Hosting & Apps",
+    "name": "vibekit_list_templates",
+    "description": "List available templates for vibekit_create_app (e.g. landing, dashboard, blog, saas, crud-api).",
+    "inputSchema": { "type": "object", "properties": {} }
+  },
+  {
+    "category": "Hosting & Apps",
+    "name": "vibekit_deploy",
+    "description": "Deploy a GitHub repo to VibeKit hosting.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "repo": { "type": "string", "description": "GitHub repo in format 'owner/repo'" },
+        "subdomain": { "type": "string", "description": "Subdomain for the app (will be deployed to {subdomain}.vibekit.bot)" }
+      },
+      "required": ["repo", "subdomain"]
+    }
+  },
+  {
+    "category": "Hosting & Apps",
+    "name": "vibekit_redeploy",
+    "description": "Redeploy an existing hosted app to update it with latest code.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "appId": { "type": "string", "description": "The app ID to redeploy" }
+      },
+      "required": ["appId"]
+    }
+  },
+  {
+    "category": "Hosting & Apps",
+    "name": "vibekit_app_logs",
+    "description": "Get application logs for debugging and monitoring.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "appId": { "type": "string", "description": "The app ID to get logs for" },
+        "lines": { "type": "number", "description": "Number of log lines to retrieve (default: 100)" }
+      },
+      "required": ["appId"]
+    }
+  },
+  {
+    "category": "Hosting & Apps",
+    "name": "vibekit_restart_app",
+    "description": "Restart a hosted app.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "appId": { "type": "string", "description": "The app ID to restart" }
+      },
+      "required": ["appId"]
+    }
+  },
+  {
+    "category": "Hosting & Apps",
+    "name": "vibekit_stop_app",
+    "description": "Stop a hosted app.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "appId": { "type": "string", "description": "The app ID to stop" }
+      },
+      "required": ["appId"]
+    }
+  },
+  {
+    "category": "Hosting & Apps",
+    "name": "vibekit_start_app",
+    "description": "Start a stopped hosted app.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "appId": { "type": "string", "description": "The app ID to start" }
+      },
+      "required": ["appId"]
+    }
+  },
+  {
+    "category": "Hosting & Apps",
+    "name": "vibekit_app_env",
+    "description": "Get environment variables for a hosted app.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "appId": { "type": "string", "description": "The app ID to get environment variables for" }
+      },
+      "required": ["appId"]
+    }
+  },
+  {
+    "category": "Hosting & Apps",
+    "name": "vibekit_set_env",
+    "description": "Set environment variables for a hosted app.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "appId": { "type": "string", "description": "The app ID to set environment variables for" },
+        "vars": { "type": "object", "description": "Object of key-value pairs to set as environment variables" }
+      },
+      "required": ["appId", "vars"]
+    }
+  },
+  {
+    "category": "Hosting & Apps",
+    "name": "vibekit_delete_app",
+    "description": "Delete a hosted app permanently.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "appId": { "type": "string", "description": "The app ID to delete" }
+      },
+      "required": ["appId"]
+    }
+  },
+  {
+    "category": "AI Agent",
+    "name": "vibekit_chat",
+    "description": "Chat with an app's AI agent. The agent can read, write, and modify the app's code.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "appId": { "type": "string", "description": "The app ID to chat with the agent for" },
+        "message": { "type": "string", "description": "Message to send to the AI agent" }
+      },
+      "required": ["appId", "message"]
+    }
+  },
+  {
+    "category": "AI Agent",
+    "name": "vibekit_agent_status",
+    "description": "Get the status of an app's AI agent.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "appId": { "type": "string", "description": "The app ID to get agent status for" }
+      },
+      "required": ["appId"]
+    }
+  },
+  {
+    "category": "AI Agent",
+    "name": "vibekit_agent_history",
+    "description": "Get chat history with an app's AI agent.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "appId": { "type": "string", "description": "The app ID to get agent history for" },
+        "limit": { "type": "number", "description": "Maximum number of messages to return (default: 20)" }
+      },
+      "required": ["appId"]
+    }
+  },
+  {
+    "category": "Database",
+    "name": "vibekit_enable_database",
+    "description": "Enable database for a hosted app.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "appId": { "type": "string", "description": "The app ID to enable database for" }
+      },
+      "required": ["appId"]
+    }
+  },
+  {
+    "category": "Database",
+    "name": "vibekit_database_status",
+    "description": "Get database status and connection info for an app.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "appId": { "type": "string", "description": "The app ID to get database status for" }
+      },
+      "required": ["appId"]
+    }
+  },
+  {
+    "category": "QA",
+    "name": "vibekit_run_qa",
+    "description": "Run automated QA tests on a hosted app.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "appId": { "type": "string", "description": "The app ID to run QA tests for" }
+      },
+      "required": ["appId"]
+    }
+  },
+  {
+    "category": "QA",
+    "name": "vibekit_qa_status",
+    "description": "Get QA test results and status for an app.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "appId": { "type": "string", "description": "The app ID to get QA status for" }
+      },
+      "required": ["appId"]
+    }
+  },
+  {
+    "category": "Tasks",
+    "name": "vibekit_submit_task",
+    "description": "Submit a coding task to VibeKit. The AI will write code, commit to GitHub, and deploy to {subdomain}.vibekit.bot. Returns a task ID to poll for results.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "task": { "type": "string", "description": "What you want built or changed. Be specific about features, design, and behavior." },
+        "repo": { "type": "string", "description": "GitHub repo in format 'owner/repo'. Optional — will use user's current repo if not specified." },
+        "branch": { "type": "string", "description": "Git branch to work on. Default: main" },
+        "deploy": { "type": "boolean", "description": "Auto-deploy to Vercel when done. Default: true" },
+        "callbackUrl": { "type": "string", "description": "Webhook URL to receive task completion notification." }
+      },
+      "required": ["task"]
+    }
+  },
+  {
+    "category": "Tasks",
+    "name": "vibekit_get_task",
+    "description": "Get the status and result of a previously submitted task.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "taskId": { "type": "string", "description": "The task ID returned from vibekit_submit_task" }
+      },
+      "required": ["taskId"]
+    }
+  },
+  {
+    "category": "Tasks",
+    "name": "vibekit_list_tasks",
+    "description": "List recent tasks submitted to VibeKit.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "limit": { "type": "number", "description": "Max number of tasks to return. Default: 10" },
+        "status": { "type": "string", "enum": ["pending", "running", "completed", "failed"], "description": "Filter by status" }
+      }
+    }
+  },
+  {
+    "category": "Tasks",
+    "name": "vibekit_wait_for_task",
+    "description": "Wait for a task to complete and return the result. Polls every 5 seconds up to the timeout.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "taskId": { "type": "string", "description": "The task ID to wait for" },
+        "timeoutSeconds": { "type": "number", "description": "Max seconds to wait. Default: 300 (5 minutes)" }
+      },
+      "required": ["taskId"]
+    }
+  },
+  {
+    "category": "Tasks",
+    "name": "vibekit_cancel_task",
+    "description": "Cancel a running task by ID. No-op for tasks that have already completed.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "taskId": { "type": "string", "description": "The task ID to cancel" }
+      },
+      "required": ["taskId"]
+    }
+  },
+  {
+    "category": "Schedules",
+    "name": "vibekit_create_schedule",
+    "description": "Create a scheduled recurring task. The AI will run this task automatically on the specified schedule.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "task": { "type": "string", "description": "What to do on each run. e.g., 'Improve SEO and page speed'" },
+        "repo": { "type": "string", "description": "GitHub repo in format 'owner/repo'" },
+        "cron": { "type": "string", "description": "Cron expression. e.g., '0 9 * * 1' for every Monday at 9am UTC" },
+        "name": { "type": "string", "description": "Friendly name for the schedule" }
+      },
+      "required": ["task", "repo", "cron"]
+    }
+  },
+  {
+    "category": "Schedules",
+    "name": "vibekit_list_schedules",
+    "description": "List all scheduled tasks.",
+    "inputSchema": { "type": "object", "properties": {} }
+  },
+  {
+    "category": "Schedules",
+    "name": "vibekit_delete_schedule",
+    "description": "Delete a scheduled task.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "scheduleId": { "type": "string", "description": "The schedule ID to delete" }
+      },
+      "required": ["scheduleId"]
+    }
+  },
+  {
+    "category": "Account",
+    "name": "vibekit_account",
+    "description": "Get VibeKit account info including plan, credits balance, and usage.",
+    "inputSchema": { "type": "object", "properties": {} }
+  },
+  {
+    "category": "Skills",
+    "name": "vibekit_list_skills",
+    "description": "List all available implementation skills. Returns skill IDs, names, descriptions, and tags. Use this to discover what skills are available before fetching specific ones.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "tag": { "type": "string", "description": "Filter skills by tag (e.g., 'react', 'database', 'security')" }
+      }
+    }
+  },
+  {
+    "category": "Skills",
+    "name": "vibekit_get_skill",
+    "description": "Fetch the full content of a specific skill. Skills contain implementation patterns, code examples, and best practices for a domain. Fetch skills on-demand when you need guidance on a specific topic.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "description": "Skill ID from vibekit_list_skills (e.g., 'nextjs', 'trpc', 'auth')" }
+      },
+      "required": ["id"]
+    }
+  }
+]
