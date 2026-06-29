@@ -210,6 +210,72 @@
     }
   },
   {
+    "category": "Database",
+    "name": "vibekit_db_schema",
+    "description": "Get the database schema for an app — all tables and their columns. Use this before writing a query.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "appId": { "type": "string", "description": "The app ID" }
+      },
+      "required": ["appId"]
+    }
+  },
+  {
+    "category": "Database",
+    "name": "vibekit_db_query",
+    "description": "Run a SQL query against an app's Postgres database and return the result rows. Supports reads and writes. SQL string, max 5000 chars.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "appId": { "type": "string", "description": "The app ID" },
+        "sql": { "type": "string", "description": "SQL to execute (max 5000 chars)" }
+      },
+      "required": ["appId", "sql"]
+    }
+  },
+  {
+    "category": "Database",
+    "name": "vibekit_db_table",
+    "description": "Browse rows in a specific database table, with pagination and optional sorting.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "appId": { "type": "string", "description": "The app ID" },
+        "table": { "type": "string", "description": "Table name" },
+        "limit": { "type": "number", "description": "Max rows to return (default 50, max 200)" },
+        "offset": { "type": "number", "description": "Row offset for pagination (default 0)" }
+      },
+      "required": ["appId", "table"]
+    }
+  },
+  {
+    "category": "Hosting & Apps",
+    "name": "vibekit_list_deploys",
+    "description": "List recent deploys for an app, most recent first, with their status and commit info. Find a deploy ID here to roll back to.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "appId": { "type": "string", "description": "The app ID" },
+        "limit": { "type": "number", "description": "Max deploys to return (default 20, max 50)" }
+      },
+      "required": ["appId"]
+    }
+  },
+  {
+    "category": "Hosting & Apps",
+    "name": "vibekit_rollback_deploy",
+    "description": "Roll an app back to a previous deploy. Get the deploy ID from vibekit_list_deploys. The container restarts on the rolled-back build.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "appId": { "type": "string", "description": "The app ID" },
+        "deployId": { "type": "string", "description": "The deploy ID to roll back to (from vibekit_list_deploys)" }
+      },
+      "required": ["appId", "deployId"]
+    }
+  },
+  {
     "category": "QA",
     "name": "vibekit_run_qa",
     "description": "Run automated QA tests on a hosted app.",

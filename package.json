@@ -1,6 +1,6 @@
 {
   "name": "vibekit-mcp",
-  "version": "0.6.1",
+  "version": "0.7.0",
   "mcpName": "io.github.609NFT/vibekit-mcp",
   "description": "MCP server for VibeKit — deploy apps, manage hosting, chat with AI agents, and run coding tasks from Claude Desktop, Cursor, and other MCP clients.",
   "main": "dist/index.js",

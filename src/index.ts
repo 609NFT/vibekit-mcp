@@ -178,6 +178,41 @@ async function handleTool(
       result = await apiRequest("GET", `/hosting/app/${args.appId}/database`);
       break;
 
+    case "vibekit_db_schema":
+      result = await apiRequest("GET", `/hosting/app/${args.appId}/database/schema`);
+      break;
+
+    case "vibekit_db_query":
+      result = await apiRequest("POST", `/hosting/app/${args.appId}/database/query`, {
+        sql: args.sql,
+      });
+      break;
+
+    case "vibekit_db_table": {
+      let path = `/hosting/app/${args.appId}/database/tables/${args.table}`;
+      const params = new URLSearchParams();
+      if (args.limit) params.set("limit", String(args.limit));
+      if (args.offset) params.set("offset", String(args.offset));
+      if (params.toString()) path += `?${params.toString()}`;
+      result = await apiRequest("GET", path);
+      break;
+    }
+
+    // Deploys
+    case "vibekit_list_deploys": {
+      let path = `/hosting/app/${args.appId}/deploys`;
+      if (args.limit) path += `?limit=${args.limit}`;
+      result = await apiRequest("GET", path);
+      break;
+    }
+
+    case "vibekit_rollback_deploy":
+      result = await apiRequest(
+        "POST",
+        `/hosting/app/${args.appId}/deploys/${args.deployId}/rollback`
+      );
+      break;
+
     // QA
     case "vibekit_run_qa":
       result = await apiRequest("POST", `/hosting/app/${args.appId}/qa`);
@@ -330,7 +365,7 @@ async function handleTool(
 const server = new Server(
   {
     name: "vibekit-mcp",
-    version: "0.6.1",
+    version: "0.7.0",
   },
   {
     capabilities: {
