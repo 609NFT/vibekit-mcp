@@ -64,8 +64,9 @@ import { join } from "path";
 
 const TOOLS_MANIFEST_PATH = join(__dirname, "..", "tools.json");
 const tools: Tool[] = JSON.parse(readFileSync(TOOLS_MANIFEST_PATH, "utf8")).map(
-  (t: { name: string; description: string; inputSchema: Tool["inputSchema"] }): Tool => ({
+  (t: { name: string; title?: string; description: string; inputSchema: Tool["inputSchema"] }): Tool => ({
     name: t.name,
+    title: t.title,
     description: t.description,
     inputSchema: t.inputSchema,
   })
@@ -365,7 +366,8 @@ async function handleTool(
 const server = new Server(
   {
     name: "vibekit-mcp",
-    version: "0.7.0",
+    title: "VibeKit",
+    version: "0.7.1",
   },
   {
     capabilities: {
