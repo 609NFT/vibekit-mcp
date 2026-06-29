@@ -4,6 +4,18 @@ MCP server for VibeKit, deploy apps, manage hosting, and chat with AI agents fro
 
 This package is for **VibeKit cloud/API access**. It does **not** connect your local Claude Code instance to Telegram. For local-machine remote control, use `vibekit-agent`.
 
+## Use it remotely (no install)
+
+VibeKit also runs as a hosted remote server, so clients that accept a remote MCP URL (claude.ai web connectors, ChatGPT, etc.) need **no install**:
+
+```
+https://mcp.vibekit.bot/mcp?api_key=vk_your_api_key_here
+```
+
+Paste that URL into your client's "custom connector" / "remote MCP server" field. Clients that let you set headers can instead send `Authorization: Bearer vk_your_api_key_here` and use the bare `https://mcp.vibekit.bot/mcp`. Get a key from [@the_vibe_kit_bot](https://t.me/the_vibe_kit_bot) with `/apikey`.
+
+Prefer a local stdio install (e.g. Claude Desktop)? Use the steps below.
+
 ## Installation
 
 ```bash

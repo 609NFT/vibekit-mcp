@@ -8,7 +8,7 @@
     "url": "https://github.com/609NFT/vibekit-mcp",
     "source": "github"
   },
-  "version": "0.7.0",
+  "version": "0.7.1",
   "packages": [
     {
       "registryType": "npm",
@@ -22,6 +22,20 @@
         {
           "name": "VIBEKIT_API_KEY",
           "description": "Your VibeKit API key (vk_...). Get one from the VibeKit bot on Telegram with the /apikey command.",
+          "isRequired": true,
+          "isSecret": true
+        }
+      ]
+    }
+  ],
+  "remotes": [
+    {
+      "type": "streamable-http",
+      "url": "https://mcp.vibekit.bot/mcp",
+      "headers": [
+        {
+          "name": "Authorization",
+          "description": "Bearer vk_... — your VibeKit API key. Get one from the VibeKit bot on Telegram with /apikey. (Clients that can't set headers may instead append ?api_key=vk_... to the URL.)",
           "isRequired": true,
           "isSecret": true
         }
